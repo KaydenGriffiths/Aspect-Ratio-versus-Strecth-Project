@@ -51,6 +51,8 @@ void draw() {
   rect( leftX, leftY, leftWidth, leftHeight );//strecthed image box
   rect( rightX, rightY, rightWidth, rightHeight );//scaled image box 
   line(0.5*appWidth, 0*appHeight, appWidth*0.5, appHeight);//readjusting line
+  //
+  image( soggyCat, leftX, leftY);
 }//End draw
 
 void keyPressed() {
