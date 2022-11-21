@@ -1,7 +1,7 @@
 //Global Variables 
-PImage soggyCat;
-float topX, topY, topWidth, topHeight;
-float bottomX, bottomY, bottomWidth, bottomHeight;
+PImage soggyCat, bgImage;
+float leftX, leftY, leftWidth, leftHeight;
+float rightX, rightY, rightWidth, rightHeight;
 boolean nightMode=false;
 float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
 int appWidth, appHeight;
@@ -26,14 +26,15 @@ void setup() {
   //
   //Population
   soggyCat = loadImage("../Images Used/Portrait/Soggy-Cat.jpg");
-  topX = appWidth * 1/4;
-  topY = appHeight * 1/20;
-  topWidth = appWidth * 1/2;
-  topHeight = appHeight * 13/20;
-  bottomX = appWidth *1/2;
-  bottomY = appHeight * 3/4;
-  bottomWidth = appWidth * 1/4;
-  bottomHeight = appHeight * 4/20;
+  bgImage = loadImage("../Images Used/Landscape/LOBSTER.jpg");
+  leftX = appWidth * 1/8;
+  leftY = appHeight * 1/10;
+  leftWidth = appWidth * 1/4;
+  leftHeight = appHeight * 3/4;
+  rightX = appWidth * 5/8;
+  rightY = appHeight * 1/10;
+  rightWidth = appWidth * 1/4;
+  rightHeight = appHeight * 3/4;
   backgroundImageX = appWidth*0;
   backgroundImageY = appHeight*0;
   backgroundImageWidth = appWidth-1;
@@ -42,13 +43,14 @@ void setup() {
   int picWidth = 100;
   int picHeight = 125;
   //
-  //fits for two images
-  rect( topX, topY, topWidth, topHeight );
-  rect( bottomX, bottomY, bottomWidth, bottomHeight );
 }
 //End setup
 
-void draw() {
+void draw() {  
+  //fits for two images: left and right squares for portrait scaling
+  rect( leftX, leftY, leftWidth, leftHeight );//strecthed image box
+  rect( rightX, rightY, rightWidth, rightHeight );//scaled image box 
+  line(0.5*appWidth, 0*appHeight, appWidth*0.5, appHeight);//readjusting line
 }//End draw
 
 void keyPressed() {
@@ -57,14 +59,12 @@ void keyPressed() {
 void mousePressed() {  
   if ( mouseButton == LEFT) {
     nightMode = true;
-    rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
     tint(64, 64, 40, 85); //RGB: Night Mode
-    image( soggyCat, backgroundImageX, backgroundImageY);
+    image( bgImage, backgroundImageX, backgroundImageY);
   }
   if ( mouseButton == RIGHT ) {
     nightMode = false;
-    rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
     tint(255, 50); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
-    image(soggyCat, backgroundImageX, backgroundImageY);
+    image( bgImage, backgroundImageX, backgroundImageY);
   }
 }//End mousePressed
